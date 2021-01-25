@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_main_app/chat/singleMsg.dart';
 
 class Chat extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   String _message;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -14,7 +16,6 @@ class _ChatState extends State<Chat> {
         child: Container(
           color: Colors.black.withOpacity(0.8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 color: Colors.black.withOpacity(0.5),
@@ -68,9 +69,7 @@ class _ChatState extends State<Chat> {
                 ),
               ),
               ///////////////////////////////////////////////
-              Container(
-                
-              ),
+              Container(child: Expanded(child: new SingleMessage())),
 
               ///////////////////////////////////////////////
               Container(
