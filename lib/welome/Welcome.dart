@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_main_app/login/Login.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Welome extends StatelessWidget {
+  _seenWelcome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("seen", true);
+  }
+
   @override
   Widget build(BuildContext context) {
+    _seenWelcome();
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,

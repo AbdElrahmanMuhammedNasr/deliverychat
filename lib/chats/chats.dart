@@ -8,7 +8,27 @@ class Chats extends StatefulWidget {
 
 class _ChatsState extends State<Chats> {
   String _search;
-  List<int> user = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  List<Map<String, dynamic>> user = [
+    {
+      "image": 'images/3.jpeg',
+      "name": 'Tamer',
+      "lastMessage": "ok",
+      "date": "2:30 pm",
+      "numberOfMessage": 10,
+      "userNumber": "0120500002",
+      "id": "2323232323"
+    },
+    {
+      "image": 'images/3.jpeg',
+      "name": 'Abdo nasr',
+      "lastMessage": "go",
+      "date": "3:30 pm",
+      "numberOfMessage": 1,
+      "userNumber": "010000000",
+      "id": "5252fd53"
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +98,13 @@ class _ChatsState extends State<Chats> {
                   child: Column(
                     children: user
                         .map((e) => new SingleUser(
-                              image: 'images/3.jpeg',
-                              name: 'Tamer Ali',
-                              lastMessage: "come ASAP",
-                              date: '3:20',
-                              numberOfMessahe: 20,
+                              image: e['image'],
+                              name: e['name'],
+                              lastMessage: e['lastMessage'],
+                              date: e['date'],
+                              numberOfMessage: e['numberOfMessage'],
+                              userNumber: e['userNumber'],
+                              id: e['id'],
                             ))
                         .toList(),
                   ),

@@ -6,11 +6,18 @@ class SingleUser extends StatefulWidget {
   String name;
   String lastMessage;
   String date;
-  int numberOfMessahe;
+  int numberOfMessage;
+  String userNumber;
+  String id;
 
-  SingleUser({
-    this.image, this.name,this.lastMessage, this.date, this.numberOfMessahe
-  });
+  SingleUser(
+      {this.image,
+      this.name,
+      this.lastMessage,
+      this.date,
+      this.numberOfMessage,
+      this.userNumber,
+      this.id});
   @override
   _SingleUserState createState() => _SingleUserState();
 }
@@ -26,7 +33,13 @@ class _SingleUserState extends State<SingleUser> {
       child: InkWell(
         onTap: () {
           print('start chat');
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> new Chat()));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => new Chat(
+                    image: widget.image,
+                    name: widget.name,
+                    userNumber: widget.userNumber,
+                    id: widget.id,
+                  )));
         },
         child: ListTile(
           title: Text(
@@ -47,8 +60,8 @@ class _SingleUserState extends State<SingleUser> {
                 style: TextStyle(color: Colors.grey),
               ),
               Text(
-                '${widget.numberOfMessahe}',
-                style: TextStyle(color: Colors.white),
+                '${widget.numberOfMessage}',
+                style: TextStyle(color: Colors.green),
               )
             ],
           ),

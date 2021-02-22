@@ -1,16 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_main_app/chat/singleMsg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Chat extends StatefulWidget {
+  String image;
+  String name;
+  String userNumber;
+  String id;
+
+  Chat({this.image, this.name, this.userNumber, this.id});
+
   @override
   _ChatState createState() => _ChatState();
 }
 
 class _ChatState extends State<Chat> {
   String _message;
+  String _senderPhone;
+
+  _getUserData () async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _senderPhone = pref.getString('phone');
+  }
 
   @override
   Widget build(BuildContext context) {
+    _getUserData ();
     return Material(
       child: SafeArea(
         child: Container(
@@ -36,7 +51,7 @@ class _ChatState extends State<Chat> {
                           ),
                           CircleAvatar(
                             radius: 20,
-                            backgroundImage: AssetImage('images/3.jpeg'),
+                            backgroundImage: AssetImage('${widget.image}'),
                           ),
                           SizedBox(
                             width: 10,
@@ -44,7 +59,7 @@ class _ChatState extends State<Chat> {
                           Column(
                             children: [
                               Text(
-                                'Tamer',
+                                '${widget.name}',
                                 style: TextStyle(color: Colors.white),
                               ),
                               Text(
@@ -82,8 +97,15 @@ class _ChatState extends State<Chat> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          print("send");
-                          print(_message);
+                          final messageObj = {
+                            "sender": _senderPhone,
+                            "receiver": widget.userNumber,
+                            "message": _message
+                          };
+                          print(messageObj);
+                            setState(() {
+                              _message = "";
+                            });
                         }),
                     new Flexible(
                       child: Container(
